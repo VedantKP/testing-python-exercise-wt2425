@@ -161,7 +161,68 @@ FAILED tests/unit/test_diffusion2d_functions.py::test_set_initial_condition - as
 
 ### unittest log
 
+#### Changing `self.nx = int(w / dx)` to `self.nx = int(h / dx)` in initialize_domain
 
+```sh
+PS C:\Users\Vedant\Documents\Uni\Subjects\Winter2425\SimTech\Exercises\Exercise7\testing-python-exercise-wt2425> python -m unittest .\tests\unit\test_diffusion2d_functions.py
+Fdt = 0.008000000000000002
+..
+======================================================================
+FAIL: test_initialize_domain (tests.unit.test_diffusion2d_functions.TestDiffusion2D.test_initialize_domain)
+Check function SolveDiffusion2D.initialize_domain
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Vedant\Documents\Uni\Subjects\Winter2425\SimTech\Exercises\Exercise7\testing-python-exercise-wt2425\tests\unit\test_diffusion2d_functions.py", line 21, in test_initialize_domain
+    self.assertEqual(self.solver.nx, 100)
+AssertionError: 150 != 100
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+FAILED (failures=1)
+```
+
+#### Changing to `dx2, dy2 = self.dx * self.dy, self.dx * self.dy` in initialize_physical_parameters
+
+```sh
+PS C:\Users\Vedant\Documents\Uni\Subjects\Winter2425\SimTech\Exercises\Exercise7\testing-python-exercise-wt2425> python -m unittest .\tests\unit\test_diffusion2d_functions.py
+.dt = 0.010000000000000002
+F.
+======================================================================
+FAIL: test_initialize_physical_parameters (tests.unit.test_diffusion2d_functions.TestDiffusion2D.test_initialize_physical_parameters)
+Checks function SolveDiffusion2D.initialize_domain
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Vedant\Documents\Uni\Subjects\Winter2425\SimTech\Exercises\Exercise7\testing-python-exercise-wt2425\tests\unit\test_diffusion2d_functions.py", line 34, in test_initialize_physical_parameters
+    self.assertAlmostEqual(self.solver.dt, 0.008)
+AssertionError: 0.010000000000000002 != 0.008 within 7 places (0.0020000000000000018 difference)
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+FAILED (failures=1)
+```
+
+#### Changing to `u = self.T_hot * np.ones((self.nx, self.ny))` in set_initial_condition
+
+```sh
+PS C:\Users\Vedant\Documents\Uni\Subjects\Winter2425\SimTech\Exercises\Exercise7\testing-python-exercise-wt2425> python -m unittest .\tests\unit\test_diffusion2d_functions.py
+.dt = 0.008000000000000002
+.F
+======================================================================
+FAIL: test_set_initial_condition (tests.unit.test_diffusion2d_functions.TestDiffusion2D.test_set_initial_condition)
+Checks function SolveDiffusion2D.get_initial_function
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Vedant\Documents\Uni\Subjects\Winter2425\SimTech\Exercises\Exercise7\testing-python-exercise-wt2425\tests\unit\test_diffusion2d_functions.py", line 52, in test_set_initial_condition
+    self.assertEqual(u[0, 0], self.solver.T_cold)
+AssertionError: 400.0 != 100.0
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.005s
+
+FAILED (failures=1)
+```
 
 ## Citing
 
